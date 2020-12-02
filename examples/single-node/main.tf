@@ -27,23 +27,7 @@ module "blaise_server_park" {
   management_communication_port = 8031
 
   instances = {
-    mgmt    = { roles = ["management"] },
-    session = { roles = ["session"] },
-    data    = { roles = ["data"] },
-    cati    = { roles = ["cati"] },
-
-    data-entry-01 = { roles = ["dataentry"] },
-    data-entry-02 = { roles = ["dataentry"] },
-    data-entry-03 = { roles = ["dataentry"] },
-
-    resource-01 = { roles = ["resource"] },
-    resource-02 = { roles = ["resource"] },
-    resource-03 = { roles = ["resource"] },
-
-    web-01 = { roles = ["web"] },
-    web-02 = { roles = ["web"] },
-    web-03 = { roles = ["web"] },
-    web-04 = { roles = ["web"] }
+    node    = { roles = ["management", "session", "data", "cati", "dataentry", "resource", "web"] },
   }
 
   # csharp services
