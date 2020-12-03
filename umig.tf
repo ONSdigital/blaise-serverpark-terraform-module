@@ -4,8 +4,12 @@ resource "random_id" "name_suffix" {
 }
 
 resource "random_password" "windows_password" {
-  length  = 16
-  special = false
+  length      = 16
+  min_special = 2
+  min_numeric = 2
+  min_lower   = 2
+  min_upper   = 2
+  
 }
 
 resource "random_password" "blaise_admin_password" {
