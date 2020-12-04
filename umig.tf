@@ -5,7 +5,7 @@ resource "random_id" "name_suffix" {
 
 resource "random_password" "windows_password" {
   length      = 16
-  min_special = 2
+  special     = false
   min_numeric = 2
   min_lower   = 2
   min_upper   = 2
