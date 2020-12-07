@@ -77,6 +77,7 @@ resource "google_compute_instance_from_template" "instance" {
     var.labels,
     {
       name = each.key
+      type = "server-park"
     }
   )
 }

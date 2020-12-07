@@ -40,6 +40,7 @@ module "blaise_instance_template" {
   auto_delete          = true
   subnetwork           = data.google_compute_subnetwork.default.self_link
   tags                 = var.vm_tags
+  labels               = merge(var.vm_labels, {"blaise.server_park": var.server_park_name})
 
   access_config = [
     {
