@@ -78,7 +78,7 @@ resource "google_compute_instance_from_template" "instance" {
     {
       name = each.key
       type = "server-park"
-      "blaise.server_park" = var.server_park_name
+      "server_park_name" = var.server_park_name
     }
   )
 }
