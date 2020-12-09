@@ -80,6 +80,16 @@ variable vm_machine_type {
   default = "n2-highmem-2"
 }
 
+variable source_image_family {
+  type    = string
+  default = "windows-2019"
+}
+
+variable source_image_project {
+  type    = string
+  default = "windows-cloud"
+}
+
 variable server_park_name {
   type        = string
   description = "server park name"
