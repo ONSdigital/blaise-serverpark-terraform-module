@@ -41,12 +41,12 @@ module "blaise_instance_template" {
   subnetwork           = data.google_compute_subnetwork.default.self_link
   tags                 = var.vm_tags
 
-  access_config = [
+  access_config = var.has_public_ip ? [
     {
       nat_ip       = ""
       network_tier = "PREMIUM"
     }
-  ]
+  ] : []
 
   service_account = {
     email  = data.google_service_account.default.email

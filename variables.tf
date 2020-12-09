@@ -105,6 +105,12 @@ variable licensee {
   description = "name of the license holder"
 }
 
+variable has_public_ip {
+  type        = bool
+  description = "if true, VMs will be created with public IP addresses"
+  default     = false
+}
+
 variable external_communication_port {
   type        = number
   description = "port used by blaise server manager"
