@@ -33,8 +33,8 @@ module "blaise_instance_template" {
   name_prefix          = var.server_park_name
   project_id           = var.project_id
   machine_type         = var.vm_machine_type
-  source_image_family  = "windows-2019"
-  source_image_project = "windows-cloud"
+  source_image_family  = var.source_image_family
+  source_image_project = var.source_image_project
   disk_type            = "pd-ssd"
   disk_size_gb         = 100
   auto_delete          = true
