@@ -49,11 +49,10 @@ resource "google_compute_instance_from_template" "instance" {
       "ENV_BLAISE_ADMIN_PASSWORD" = random_password.blaise_admin_password.result,
 
       # azure csharp stuff
-      # "BLAISE_AZURE_PROJECT_URL"          = var.azure_project_url,
-      # "BLAISE_AZURE_AGENT_INPUT_TOKEN"    = var.azure_agent_input_token,
-      # "BLAISE_AZURE_AGENT_NAME"           = "${var.server_park_name}-${var.instances[count.index].name}"
-      # "BLAISE_AZURE_AGENT_POOL_NAME"      = var.azure_agent_poolname,
-      "BLAISE_SERVICES_LIST" = var.blaise_services,
+      "BLAISE_AZURE_PROJECT_URL"        = var.azure_project_url,
+      "BLAISE_AZURE_AGENT_INPUT_TOKEN"  = var.azure_agent_input_token,
+      "BLAISE_AZURE_AGENT_POOL_NAME"    = var.azure_agent_poolname,
+      "BLAISE_SERVICES_LIST"            = var.blaise_services,
 
       # server park roles
       "BLAISE_MANAGEMENTSERVER" = contains(each.value.roles, "management") ? "1" : "0",

@@ -110,7 +110,7 @@ function SetupAzure
 --runAsService `
 --windowsLogonAccount $WINDOWS_USERNAME `
 --windowsLogonPassword $WINDOWS_PASSWORD `
---agent $AZURE_AGENT_NAME `
+--agent $(Hostname) `
 --replace
 }
 
