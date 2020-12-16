@@ -6,6 +6,7 @@ output service_account {
 output instances {
   description = "map of instance data used by the reverse proxy"
   value = [for idx, instance in google_compute_instance_from_template.instance :
+    instance.name =
     { name : instance.name,
       hostname : instance.name,
       fq_internal_name : "${instance.name}.${instance.zone}.c.${var.project_id}.internal"
