@@ -23,7 +23,7 @@ resource "google_compute_firewall" "default" {
     ]
   }
 
-  source_ranges = concat(var.load_balancer_whitelist, data.google_compute_subnetwork.default.ip_cidr_range)
+  source_ranges = concat(var.load_balancer_whitelist, [data.google_compute_subnetwork.default.ip_cidr_range])
 
   target_tags = var.vm_tags
 }
