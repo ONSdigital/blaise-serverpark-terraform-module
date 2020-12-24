@@ -254,7 +254,7 @@ $blaise_args += "ADMINISTRATORPASSWORD=$ADMINPASS"
 $blaise_args += "INSTALLDIR=$INSTALLDIR"
 $blaise_args += "DEPLOYFOLDER=$DEPLOYFOLDER"
 
-if ( $MANAGEMENTSERVER ) {
+if ( $MANAGEMENTSERVER -eq "1" ) {
   $blaise_args += "SERVERPARK=$SERVERPARK"
 }
 
