@@ -248,13 +248,15 @@ $blaise_args += "MANAGEMENTCOMMUNICATIONPORT=8031"
 $blaise_args += "EXTERNALCOMMUNICATIONPORT=8033"
 #$blaise_args += "MANAGEMENTBINDING=https"
 #$blaise_args += "EXTERNALBINDING=https"
-$blaise_args += "SERVERPARK=$SERVERPARK"
 $blaise_args += "MACHINEKEY=$MACHINEKEY"
 $blaise_args += "ADMINISTRATORUSER=$ADMINUSER"
 $blaise_args += "ADMINISTRATORPASSWORD=$ADMINPASS"
 $blaise_args += "INSTALLDIR=$INSTALLDIR"
 $blaise_args += "DEPLOYFOLDER=$DEPLOYFOLDER"
-#$blaise_args += $blaise_install_params
+
+if ( $MANAGEMENTSERVER ) {
+  $blaise_args += "SERVERPARK=$SERVERPARK"
+}
 
 # server park roles
 $blaise_args += "MANAGEMENTSERVER=$MANAGEMENTSERVER"
