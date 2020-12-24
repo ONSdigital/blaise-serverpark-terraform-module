@@ -226,12 +226,13 @@ Write-Host "SERVERPARK: $SERVERPARK"
 Write-Host "GCP_BUCKET: $GCP_BUCKET"
 
 Write-Host "Download Blaise redistributables from '$GCP_BUCKET'"
-gsutil cp gs://$GCP_BUCKET/Blaise5_7_7_2284.zip "C:\dev\data"
+$BLAISE_VERSION="Blaise5_8_7_2522"
+gsutil cp gs://$GCP_BUCKET/$BLAISE_VERSION.zip "C:\dev\data"
 
 # unzip blaise installer
 Write-Host "Expanding archive to 'Blaise' dir"
 mkdir C:\dev\data\Blaise
-Expand-Archive -Force C:\dev\data\Blaise5_7_7_2284.zip C:\dev\data\Blaise\
+Expand-Archive -Force C:\dev\data\$BLAISE_VERSION.zip C:\dev\data\Blaise\
 
 Write-Host "Setting Blaise install args"
 $blaise_args = "/qn","/norestart","/log C:\dev\data\Blaise5-install.log","/i C:\dev\data\Blaise\Blaise5.msi"
