@@ -77,7 +77,9 @@ resource "google_compute_instance_from_template" "instance" {
     {
       name = each.key
       type = "server-park"
-      "server_park_name" = var.server_park_name
+      "server_park_name" = var.server_park_name # deprecate this
+      "blaise.server_park.name" = var.server_park_name
+      "blaise.server_park.roles" = join(",", each.value.roles)
     }
   )
 }
