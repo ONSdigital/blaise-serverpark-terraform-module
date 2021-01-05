@@ -13,6 +13,15 @@ output instances {
   ]
 }
 
+output web_instances {
+  description = "map of instance data where instances have the 'web' role"
+  value = [for idx, instance in google_computer_instance_from_template.instance :
+    { name : instance.name,
+      hostname : instance,
+    } if contains(split(",", instance.labels.roles), "webserver")
+  ]
+}
+
 output hostnames {
   description = "list of instance hostnames"
   value       = [for x in google_compute_instance_from_template.instance : x.name]
