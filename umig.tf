@@ -44,6 +44,7 @@ resource "google_compute_instance_from_template" "instance" {
       "BLAISE_GCP_BUCKET"         = var.blaise_install_distributables_bucket,
       "BLAISE_WINDOWS_USERNAME"   = var.windows_username,
       "BLAISE_WINDOWS_PASSWORD"   = random_password.windows_password.result,
+      "BLAISE_CLOUDSQL_CONNECT"   = var.cloudsql_connection,
       "ENV_PROJECT_ID"            = var.project_id
       "ENV_BLAISE_ADMIN_USER"     = var.blaise_admin_username,
       "ENV_BLAISE_ADMIN_PASSWORD" = random_password.blaise_admin_password.result,
