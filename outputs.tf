@@ -15,10 +15,10 @@ output instances {
 
 output web_instances {
   description = "map of instance data where instances have the 'web' role"
-  value = [for idx, instance in google_computer_instance_from_template.instance :
+  value = [for idx, instance in google_compute_instance_from_template.instance :
     { name : instance.name,
-      hostname : instance,
-    } if contains(split(",", instance.labels.roles), "webserver")
+      hostname : instance.name,
+    } if contains(split(local.role_label_concatenation_char, lookup(instance.labels, "blaise_server_park_roles", "")), "webserver")
   ]
 }
 

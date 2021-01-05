@@ -1,3 +1,7 @@
+locals {
+  role_label_concatenation_char = "-"
+}
+
 resource "random_id" "name_suffix" {
   count       = length(var.instances)
   byte_length = 4
@@ -78,8 +82,8 @@ resource "google_compute_instance_from_template" "instance" {
       name = each.key
       type = "server-park"
       "server_park_name" = var.server_park_name # deprecate this
-      "blaise.server_park.name" = var.server_park_name
-      "blaise.server_park.roles" = join(",", each.value.roles)
+      "blaise_server_park_name" = var.server_park_name
+      "blaise_server_park_roles" = join(local.role_label_concatenation_char, each.value.roles)
     }
   )
 }
