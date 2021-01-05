@@ -214,6 +214,14 @@ Write-Host "Installing ISS..."
 Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature
 
 #################
+# INSTALL MYSQL DOT NET CONNECTOR
+#################
+Write-Host "Installing MYSQL DOT NET CONNECTOR..."
+gsutil cp gs://$GCP_BUCKET/mysql-connector-net-8.0.22.msi "C:\dev\data"
+
+Start-Process msiexec.exe -Wait -ArgumentList '/I C:\dev\data\mysql-connector-net-8.0.22.msi /quiet'
+
+#################
 # INSTALL BLAISE
 #################
 
