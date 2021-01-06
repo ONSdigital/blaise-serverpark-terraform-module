@@ -27,7 +27,11 @@ variable blaise_activation_code { type = string }
 variable blaise_admin_username { type = string }
 #variable blaise_admin_password { type = string }
 variable blaise_install_distributables_bucket { type = string }
+
+#CloudSQL Information
 variable cloudsql_connect { type = string }
+variable cloudsql_user { type = string }
+variable cloudsql_pw { type = string }
 
 variable windows_username {
   type        = string
