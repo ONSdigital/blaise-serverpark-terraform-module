@@ -210,8 +210,27 @@ SetupAzure
 #################
 # INSTALL IIS
 #################
-Write-Host "Installing ISS..."
+Write-Host "Installing IIS..."
 Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature
+
+##################################
+# INSTALL MYSQL DOT NET CONNECTOR
+##################################
+Write-Host "Installing MYSQL DOT NET CONNECTOR..."
+gsutil cp gs://$GCP_BUCKET/mysql-connector-net-8.0.22.msi "C:\dev\data"
+
+Start-Process msiexec.exe -Wait -ArgumentList '/I C:\dev\data\mysql-connector-net-8.0.22.msi /quiet'
+
+
+#########################
+# INSTALL CLOUDSQL PROXY
+#########################
+Write-Host "Installing CloudSQL Proxy and NSSM Process"
+gsutil cp "gs://$GCP_BUCKET/nssm.exe" "C:\Windows\nssm.exe"
+gsutil cp "gs://$GCP_BUCKET/cloud_sql_proxy_x64.exe" "C:\Windows\cloud_sql_proxy_x64.exe"
+nssm install cloudsql_proxy C:\Windows\cloud_sql_proxy_x64.exe -instances="$CLOUDSQL_CONNECT=tcp:3306" -ip_address_types=PRIVATE
+nssm set cloudsql_proxy Start SERVICE_AUTO_START
+nssm start cloudsql_proxy
 
 #################
 # INSTALL BLAISE
