@@ -54,7 +54,7 @@ resource "google_compute_instance_from_template" "instance" {
       # azure csharp stuff
       "BLAISE_AZURE_PROJECT_URL"        = var.azure_project_url,
       "BLAISE_AZURE_AGENT_INPUT_TOKEN"  = var.azure_agent_input_token,
-      "BLAISE_AZURE_AGENT_POOL_NAME"    = var.azure_agent_poolname,
+      "BLAISE_AZURE_AGENT_ENV_NAME"     = var.azure_agent_envname,
       "BLAISE_SERVICES_LIST"            = var.blaise_services,
 
       # server park roles

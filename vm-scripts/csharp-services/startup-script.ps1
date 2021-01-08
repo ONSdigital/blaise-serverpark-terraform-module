@@ -67,9 +67,10 @@ function SetupAzure
   ######################
   # INSTALL AZURE AGENT
   ######################
-  $VSTS_AGENT_ARCHIVE_FILENAME = "vsts-agent-win-x64-2.166.3.zip"
+
+  $VSTS_AGENT_ARCHIVE_FILENAME = "vsts-agent-win-x64-2.179.0.zip"
   gsutil cp gs://$GCP_BUCKET/$VSTS_AGENT_ARCHIVE_FILENAME "C:\dev\data"
-  Expand-Archive -Force C:\dev\data\vsts-agent-win-x64-2.166.3.zip C:\dev\agent\
+  Expand-Archive -Force C:\dev\data\$VSTS_AGENT_ARCHIVE_FILENAME C:\dev\agent\
 
 
   # we must use 'replace' on this option because if the user exists and we do not put replace
@@ -77,15 +78,15 @@ function SetupAzure
   # shutdown will not work; so we will never remove a user if the shutdown script ever fails.
   Write-Host "Configuring Azure Agent Service..."
   C:\dev\agent\config.cmd --unattended `
---url $AZURE_PROJECT_URL `
---auth PAT `
---token $AZURE_AGENT_INPUT_TOKEN `
---pool $AZURE_AGENT_POOL_NAME `
---runAsService `
---windowsLogonAccount $WINDOWS_USERNAME `
---windowsLogonPassword $WINDOWS_PASSWORD `
---agent $AZURE_AGENT_NAME `
---replace
+  --environment `
+  --environmentname $AZURE_AGENT_ENV_NAME `
+  --agent $(Hostname) `
+  --runasservice --work '_work' `
+  --url $AZURE_PROJECT_URL `
+  --projectname 'csharp' `
+  --auth PAT `
+  --token $AZURE_AGENT_INPUT_TOKEN `
+  --replace TRUE
 }
 
 If (Test-Path D:) {

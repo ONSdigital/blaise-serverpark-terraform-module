@@ -12,7 +12,7 @@ variable vm_service_account_name {
   description = "blaise VM service account"
 }
 
-variable azure_agent_poolname { type = string }
+variable azure_agent_envname { type = string }
 variable azure_agent_input_token { type = string }
 variable azure_project_url { type = string }
 variable service_azure_agent_name { type = string }
