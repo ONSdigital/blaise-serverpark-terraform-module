@@ -5,11 +5,18 @@ output service_account {
 
 output instances {
   description = "map of instance data used by the reverse proxy"
-  value = [for idx, instance in google_compute_instance_from_template.instance :
-    { name : instance.name,
+  value = {for idx, instance in google_compute_instance_from_template.instance :
+    idx => { name : instance.name,
       hostname : instance.name,
       fq_internal_name : "${instance.name}.${instance.zone}.c.${var.project_id}.internal"
     }
+  }
+}
+
+output web_instances {
+  description = "map of instance data where instances have the 'web' role"
+  value = [for idx, instance in google_compute_instance_from_template.instance : instance.name
+    if contains(split(local.role_label_concatenation_char, lookup(instance.labels, "blaise_server_park_roles", "")), "webserver")
   ]
 }
 
