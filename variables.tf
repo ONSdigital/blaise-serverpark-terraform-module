@@ -134,6 +134,15 @@ variable management_communication_port {
   default     = 8033
 }
 
+variable version {
+  type        = string
+  description = "Blaise version"
+
+  validation {
+    condition     = contains(["5.7.7", "5.8.7", "5.9.1"], var.version)
+    error_message = "unsupported Blaise version"
+  }
+}
 
 locals {
   blaise_install_vars = {
@@ -144,6 +153,7 @@ locals {
     "BLAISE_INSTALLDIR"                  = "\"C:\\Blaise5\"",
     "BLAISE_DEPLOYFOLDER"                = "\"D:\\Blaise5\"",
     "BLAISE_INSTALLATIONTYPE"            = "Server",
+    "BLAISE_VERSION"                     = var.version,
 
     # roles
     "BLAISE_MANAGEMENTSERVER" = 0,

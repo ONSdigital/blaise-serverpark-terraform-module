@@ -237,14 +237,31 @@ Write-Host "INSTALLDIR: $INSTALLDIR"
 Write-Host "DEPLOYFOLDER: $DEPLOYFOLDER"
 Write-Host "SERVERPARK: $SERVERPARK"
 Write-Host "GCP_BUCKET: $GCP_BUCKET"
+Write-Host "BLAISE_VERSION: $BLAISE_VERSION"
 
-Write-Host "Download Blaise redistributables from '$GCP_BUCKET'"
-gsutil cp gs://$GCP_BUCKET/Blaise5_7_7_2284.zip "C:\dev\data"
+$DEFAULT_BLAISE_INSTALLER_FILENAME="Blaise5_7_7_2284.zip"
+
+if ( $BLAISE_VERSION -eq "5.7.7" ) {
+  $BLAISE_INSTALLER_FILENAME="Blaise5_7_7_2284.zip"
+}
+elseif ( $BLAISE_VERSION -eq "5.8.7" ) {
+  $BLAISE_INSTALLER_FILENAME="Blaise5_8_7_2522.zip"
+}
+elseif ( $BLAISE_VERSION -eq "5.9.1" ) {
+  $BLAISE_INSTALLER_FILENAME="Blaise5_9_1_2637.zip"
+}
+else {
+  Write-Host "BLAISE_INSTALLER_FILENAME not set, using default"
+  $BLAISE_INSTALLER_FILENAME=$DEFAULT_BLAISE_INSTALLER_FILENAME
+}
+
+Write-Host "Download Blaise installer from '$GCP_BUCKET/$BLAISE_INSTALLER_FILENAME'"
+gsutil cp gs://$GCP_BUCKET/$BLAISE_INSTALLER_FILENAME "C:\dev\data"
 
 # unzip blaise installer
 Write-Host "Expanding archive to 'Blaise' dir"
 mkdir C:\dev\data\Blaise
-Expand-Archive -Force C:\dev\data\Blaise5_7_7_2284.zip C:\dev\data\Blaise\
+Expand-Archive -Force C:\dev\data\$BLAISE_INSTALLER_FILENAME C:\dev\data\Blaise\
 
 Write-Host "Setting Blaise install args"
 $blaise_args = "/qn","/norestart","/log C:\dev\data\Blaise5-install.log","/i C:\dev\data\Blaise\Blaise5.msi"
