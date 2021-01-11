@@ -134,7 +134,7 @@ variable management_communication_port {
   default     = 8033
 }
 
-variable version {
+variable blaise_version {
   type        = string
   description = "Blaise version"
 
@@ -153,7 +153,7 @@ locals {
     "BLAISE_INSTALLDIR"                  = "\"C:\\Blaise5\"",
     "BLAISE_DEPLOYFOLDER"                = "\"D:\\Blaise5\"",
     "BLAISE_INSTALLATIONTYPE"            = "Server",
-    "BLAISE_VERSION"                     = var.version,
+    "BLAISE_VERSION"                     = var.blaise_version,
 
     # roles
     "BLAISE_MANAGEMENTSERVER" = 0,
