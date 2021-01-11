@@ -153,7 +153,7 @@ locals {
     "BLAISE_INSTALLDIR"                  = "\"C:\\Blaise5\"",
     "BLAISE_DEPLOYFOLDER"                = "\"D:\\Blaise5\"",
     "BLAISE_INSTALLATIONTYPE"            = "Server",
-    "BLAISE_VERSION"                     = var.blaise_version,
+    "BLAISE_INTALLER_VERSION"            = var.blaise_version,
 
     # roles
     "BLAISE_MANAGEMENTSERVER" = 0,
