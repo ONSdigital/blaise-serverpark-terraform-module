@@ -139,7 +139,7 @@ variable blaise_version {
   description = "Blaise version"
 
   validation {
-    condition     = contains(["5.7.7", "5.8.7", "5.9.1"], var.version)
+    condition     = contains(["5.7.7", "5.8.7", "5.9.1"], var.blaise_version)
     error_message = "Unsupported Blaise version."
   }
 }
