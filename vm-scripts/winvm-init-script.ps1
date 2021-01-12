@@ -218,13 +218,16 @@ Start-Process msiexec.exe -Wait -ArgumentList '/I C:\dev\data\mysql-connector-ne
 
 #########################
 # INSTALL CLOUDSQL PROXY
+#
+# FIXME: these commands cause the serial-output to fail, not sure if they fail and it blocks the install
+#        bunch of stackdriver errors from the process
 #########################
 Write-Host "Installing CloudSQL Proxy and NSSM Process"
 gsutil cp "gs://$GCP_BUCKET/nssm.exe" "C:\Windows\nssm.exe"
 gsutil cp "gs://$GCP_BUCKET/cloud_sql_proxy_x64.exe" "C:\Windows\cloud_sql_proxy_x64.exe"
-nssm install cloudsql_proxy C:\Windows\cloud_sql_proxy_x64.exe -instances="$CLOUDSQL_CONNECT=tcp:3306" -ip_address_types=PRIVATE
-nssm set cloudsql_proxy Start SERVICE_AUTO_START
-nssm start cloudsql_proxy
+#nssm install cloudsql_proxy C:\Windows\cloud_sql_proxy_x64.exe -instances="$CLOUDSQL_CONNECT=tcp:3306" -ip_address_types=PRIVATE
+#nssm set cloudsql_proxy Start SERVICE_AUTO_START
+#nssm start cloudsql_proxy
 
 #################
 # INSTALL BLAISE
@@ -305,6 +308,42 @@ Write-Host "Running msiexec"
 Start-Process -Wait "msiexec" -ArgumentList $blaise_args
 
 Write-Host "Blaise installation complete"
+
+###############################
+# ADD A SERVERPARK TO THE MANAGEMNET NODE
+###############################
+
+# FIXME: remove the serverpark name from the installer,
+#        and do servermanager.exe -addserverpark here
+if ( $MANAGEMENTSERVER -eq "1" ) {
+  Write-Host "FIXME: init serverpark here"
+}
+
+###############################
+# ADD THE NODE TO A SERVERPARK
+###############################
+
+if (( $MANAGEMENTSERVER -ne "1" ) -and ( $INSTALLER_VERSION -eq "5.9.1" )) {
+  # FIXME: instead of $INSTALLER_VERSION test, set a flag to do this at the installer
+  #        filename checks something like $CAPABILITIES flag or something
+
+  # sleep so the admin node launches
+  Start-Sleep -s 10
+
+  $NODE_NAME=hostname
+
+  Write-Host "Adding '$NODE_NAME' to serverpark: '$SERVERPARK' via admin node '$ADMIN_NODE_NAME'"
+
+  Start-Process -Wait `
+    "C:\Blaise5\bin\servermanager.exe" `
+    -ArgumentList `
+    "-addserverparkserver:$NODE_NAME", `
+    "-serverpark:$SERVERPARK", `
+    "-logicalroot:default", `
+    "-server:$ADMIN_NODE_NAME", `
+    "-user:$ADMINUSER", `
+    "-password:$ADMINPASS"
+}
 
 ############################
 # CONFIGURING LOGGING AGENT
