@@ -40,7 +40,7 @@ resource "google_compute_instance_from_template" "instance" {
     local.blaise_runtime_vars,
     {
       "BLAISE_SERVERPARK"         = var.server_park_name,
-      "BLAISE_ADMIN_NODE_NAME"    = join("-", ["blaise", var.server_park_name, var.instances[0]]), # we need this before building the group...
+      "BLAISE_ADMIN_NODE_NAME"    = join("-", ["blaise", var.server_park_name, keys(var.instances)[0]]), # we need this before building the group...
       "BLAISE_MACHINEKEY"         = random_password.machinekey.result,
       "BLAISE_SERIALNUMBER"       = var.blaise_serial_number,
       "BLAISE_ACTIVATIONCODE"     = var.blaise_activation_code,
