@@ -27,7 +27,7 @@ resource "azuredevops_variable_group" "variablegroup" {
   }
   variable {
     name         = "ENV_BLAISE_ADMIN_PASSWORD"
-    secret_value = random_password.blaise_admin_password.result,
+    secret_value = random_password.blaise_admin_password.result
     is_secret    = true
   }
   variable {
