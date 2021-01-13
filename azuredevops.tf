@@ -19,7 +19,7 @@ resource "azuredevops_variable_group" "variablegroup" {
 
   variable {
     name  = "ENV_BLAISE_SERVER_HOST_NAME"
-    value = "value"
+    value = google_compute_instance_from_template.instance["node"].name
   }
   variable {
     name  = "ENV_BLAISE_ADMIN_USER"
@@ -32,23 +32,23 @@ resource "azuredevops_variable_group" "variablegroup" {
   }
   variable {
     name  = "ENV_BLAISE_SERVER_BINDING"
-    value = "value"
+    value = "HTTP"
   }
   variable {
     name  = "ENV_BLAISE_CONNECTION_PORT"
-    value = "value"
+    value = var.management_communication_port
   }
   variable {
     name  = "ENV_BLAISE_REMOTE_CONNECTION_PORT"
-    value = "value"
+    value = var.external_communication_port
   }
   variable {
     name  = "ENV_LIBRARY_DIRECTORY"
-    value = "value"
+    value = "D:\\Blaise5\\Surveys\\"
   }
   variable {
     name  = "ENV_CONNECTION_EXPIRES_IN_MINUTES"
-    value = "value"
+    value = 60
   }
   variable {
     name  = "ENV_BLAISE_GCP_BUCKET"
@@ -56,7 +56,7 @@ resource "azuredevops_variable_group" "variablegroup" {
   }
   variable {
     name  = "ENV_RESTAPI_URL"
-    value = "value"
+    value = "restapi.${var.region}-a.c.${var.project_id}.internal:90"
   }
   variable {
     name  = "ENV_TOBI_URL"
