@@ -11,10 +11,10 @@ data "azuredevops_project" "csharp" {
   name = "csharp"
 }
 
-resource "azuredevops_variable_group" "variablegroup" {
+resource "azuredevops_variable_group" "azure_var_group" {
   project_id   = data.azuredevops_project.csharp.id
-  name         = var.azure_agent_envname
-  description  = "Variable group for ${var.azure_agent_envname}"
+  name         = var.project_id
+  description  = "Variable group for ${var.project_id}"
   allow_access = true
 
   variable {
