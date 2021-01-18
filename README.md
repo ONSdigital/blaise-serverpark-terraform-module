@@ -108,10 +108,7 @@ module "my_server_park" {
 | env | Environment name (sandbox|dev|preprod) |
 | external_communication_port | port used by blaise server manager; defaults to `8031` |
 | has_public_ip | if true: creates a public IP for the instance |
-| instances | map of instances, where `key` is the name of the VM instance and `roles` entry for each item is a list of roles the Blaise install can perform.
-              value values are: `["management", "cati", "data", "session", "resource", "dataentry", "audittrail"]`
-              Instance names are patterned: `blaise-<server_park_name>-<instances_map_key>`
-              NOTE: a serverpark can only have one of each `management, cati, data` role, and multiple `session, resource, dataentry` roles. |
+| instances | map of instances, where `key` is the name of the VM instance and `roles` entry for each item is a list of roles the Blaise install can perform.<br /> Valid values are: [`management`, `cati`, `data`, `session`, `resource`, `dataentry`, `audittrail`] <br /> Instance names are patterned: `blaise-<server_park_name>-<instances_map_key>`.<br />NOTE: a serverpark can only have one of each `management, cati, data` role, and multiple `session, resource, dataentry` roles. |
 | labels | map of key-value pairs to add as VM labels |
 | load_balancer_whitelist | ip_cidrs for GCP load balancers |
 | licensee | licensee of the serial number and activation code; used by the Blaise 5 installer | 
@@ -141,5 +138,4 @@ module "my_server_park" {
 | admin_password | Blaise 5 admin password |
 | windows_username | Windows account username |
 | windows_password | Windows account password |
-| definition | server park definition for passing to dependencies; map containing `management-node-endpoint`, `server_park_name`, `cati-node-endpoint`
-               NB: incomplete |
+| definition | server park definition for passing to dependencies; map containing `management-node-endpoint`, `server_park_name`, `cati-node-endpoint`. NB: incomplete |
