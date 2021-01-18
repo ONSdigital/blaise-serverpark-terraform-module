@@ -89,6 +89,38 @@ module "my_server_park" {
 }
 ```
 
+The `instances` key specifies the number of VMs in the serverpark and which roles those VMs perform.
+A large serverpark would be specified:
+```
+
+  instances = {
+    mgmt    = { roles = ["management"] },
+    session = { roles = ["session"] },
+    data    = { roles = ["data"] },
+    cati    = { roles = ["cati"] },
+
+    data-entry-01 = { roles = ["dataentry"] },
+    data-entry-02 = { roles = ["dataentry"] },
+    data-entry-03 = { roles = ["dataentry"] },
+
+    resource-01 = { roles = ["resource"] },
+    resource-02 = { roles = ["resource"] },
+    resource-03 = { roles = ["resource"] },
+
+    web-01 = { roles = ["web"] },
+    web-02 = { roles = ["web"] },
+    web-03 = { roles = ["web"] },
+    web-04 = { roles = ["web"] }
+  }
+```
+
+a single node serverpark would be:
+```
+  instances = {
+    node    = { roles = ["management", "session", "data", "cati", "dataentry", "resource", "web"] },
+  }
+```
+
 # Inputs
 
 | Name | Description |
@@ -108,7 +140,7 @@ module "my_server_park" {
 | env | Environment name (sandbox|dev|preprod) |
 | external_communication_port | port used by blaise server manager; defaults to `8031` |
 | has_public_ip | if true: creates a public IP for the instance |
-| instances | map of instances, where `key` is the name of the VM instance and `roles` entry for each item is a list of roles the Blaise install can perform.<br /> Valid values are: [`management`, `cati`, `data`, `session`, `resource`, `dataentry`, `audittrail`] <br /> Instance names are patterned: `blaise-<server_park_name>-<instances_map_key>`.<br />NOTE: a serverpark can only have one of each `management, cati, data` role, and multiple `session, resource, dataentry` roles. |
+| instances | map of instances, where `key` is the name of the VM instance and `roles` entry for each item is a list of roles the Blaise install can perform.<br /> Valid values are: [`management`, `cati`, `data`, `session`, `resource`, `dataentry`, `audittrail`] <br /> Instances are named: `blaise-<server_park_name>-<instances_map_key>`.<br />NOTE: a serverpark can only have one of each `management, cati, data` role, and multiple `session, resource, dataentry` roles. |
 | labels | map of key-value pairs to add as VM labels |
 | load_balancer_whitelist | ip_cidrs for GCP load balancers |
 | licensee | licensee of the serial number and activation code; used by the Blaise 5 installer | 
