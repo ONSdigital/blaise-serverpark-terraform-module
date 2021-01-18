@@ -92,6 +92,7 @@ module "my_server_park" {
 # Inputs
 
 | Name | Description |
+| --- | --- |
 | azure_agent_envname | azure devops agent environment |
 | azure_agent_input_token | Personal Access Token (PAT) for the azure devops agent |
 | azure_project_url | Azure Devops project URL used by the agent |
@@ -132,6 +133,7 @@ module "my_server_park" {
 # Outputs
 
 | Name | Description |
+| --- | --- |
 | service_account | VM service account ID for adding roles |
 | instances | list of instances, containing the name, hostname, fully qualified internal name |
 | hostnames | list of instance hostnames |
