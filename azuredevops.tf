@@ -22,6 +22,10 @@ resource "azuredevops_variable_group" "azure_var_group" {
     value = google_compute_instance_from_template.instance["node"].name
   }
   variable {
+    name  = "ENV_BLAISE_EXTERNAL_SERVER_HOST_NAME"
+    value = var.azuredevopsdns
+  }
+  variable {
     name  = "ENV_BLAISE_ADMIN_USER"
     value = var.blaise_admin_username
   }
@@ -31,8 +35,12 @@ resource "azuredevops_variable_group" "azure_var_group" {
     is_secret    = true
   }
   variable {
-    name  = "ENV_BLAISE_SERVER_BINDING"
+    name  = "ENV_BLAISE_INTERNAL_SERVER_BINDING"
     value = "HTTP"
+  }
+   variable {
+    name  = "ENV_BLAISE_EXTERNAL_SERVER_BINDING"
+    value = "HTTPS"
   }
   variable {
     name  = "ENV_BLAISE_CONNECTION_PORT"

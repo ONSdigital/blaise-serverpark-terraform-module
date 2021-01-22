@@ -226,69 +226,6 @@ nssm install cloudsql_proxy C:\Windows\cloud_sql_proxy_x64.exe -instances="$CLOU
 nssm set cloudsql_proxy Start SERVICE_AUTO_START
 nssm start cloudsql_proxy
 
-#################
-# INSTALL BLAISE
-#################
-
-Write-Host "LICENSEE: $LICENSEE"
-#Write-Host "SERIALNO: $SERIALNUMBER"
-#Write-Host "ACTIVCOD: $ACTIVATIONCODE"
-Write-Host "INSTALLDIR: $INSTALLDIR"
-Write-Host "DEPLOYFOLDER: $DEPLOYFOLDER"
-Write-Host "SERVERPARK: $SERVERPARK"
-Write-Host "GCP_BUCKET: $GCP_BUCKET"
-
-Write-Host "Download Blaise redistributables from '$GCP_BUCKET'"
-gsutil cp gs://$GCP_BUCKET/Blaise5_7_7_2284.zip "C:\dev\data"
-
-# unzip blaise installer
-Write-Host "Expanding archive to 'Blaise' dir"
-mkdir C:\dev\data\Blaise
-Expand-Archive -Force C:\dev\data\Blaise5_7_7_2284.zip C:\dev\data\Blaise\
-
-Write-Host "Setting Blaise install args"
-$blaise_args = "/qn","/norestart","/log C:\dev\data\Blaise5-install.log","/i C:\dev\data\Blaise\Blaise5.msi"
-$blaise_args += "FORCEINSTALL=1"
-$blaise_args += "USERNAME=`"ONS-USER`""
-$blaise_args += "COMPANYNAME=$LICENSEE"
-$blaise_args += "LICENSEE=$LICENSEE"
-$blaise_args += "SERIALNUMBER=$SERIALNUMBER"
-$blaise_args += "ACTIVATIONCODE=$ACTIVATIONCODE"
-$blaise_args += "INSTALLATIONTYPE=Server"
-$blaise_args += "IISWEBSERVERPORT=$IISWEBSERVERPORT"
-$blaise_args += "REGISTERASPNET=$REGISTERASPNET"
-$blaise_args += "MANAGEMENTCOMMUNICATIONPORT=8031"
-$blaise_args += "EXTERNALCOMMUNICATIONPORT=8033"
-#$blaise_args += "MANAGEMENTBINDING=https"
-#$blaise_args += "EXTERNALBINDING=https"
-$blaise_args += "MACHINEKEY=$MACHINEKEY"
-$blaise_args += "ADMINISTRATORUSER=$ADMINUSER"
-$blaise_args += "ADMINISTRATORPASSWORD=$ADMINPASS"
-$blaise_args += "INSTALLDIR=$INSTALLDIR"
-$blaise_args += "DEPLOYFOLDER=$DEPLOYFOLDER"
-
-if ( $MANAGEMENTSERVER -eq "1" ) {
-  $blaise_args += "SERVERPARK=$SERVERPARK"
-}
-
-# server park roles
-$blaise_args += "MANAGEMENTSERVER=$MANAGEMENTSERVER"
-$blaise_args += "WEBSERVER=$WEBSERVER"
-$blaise_args += "DATAENTRYSERVER=$DATAENTRYSERVER"
-$blaise_args += "DATASERVER=$DATASERVER"
-$blaise_args += "RESOURCESERVER=$RESOURCESERVER"
-$blaise_args += "SESSIONSERVER=$SESSIONSERVER"
-$blaise_args += "AUDITTRAILSERVER=$AUDITTRAILSERVER"
-$blaise_args += "CATISERVER=$CATISERVER"
-
-
-Write-Host "blaise_args: $blaise_args"
-
-Write-Host "Running msiexec"
-Start-Process -Wait "msiexec" -ArgumentList $blaise_args
-
-Write-Host "Blaise installation complete"
-
 ############################
 # CONFIGURING LOGGING AGENT
 ############################

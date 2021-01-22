@@ -100,6 +100,11 @@ variable server_park_name {
   description = "server park name"
 }
 
+variable azuredevopsdns {
+  type        = string
+  description = "azure devops dns"
+}
+
 variable company_name {
   type        = string
   description = "company name of licensee"
