@@ -66,4 +66,10 @@ resource "azuredevops_variable_group" "azure_var_group" {
     name  = "ENV_DQS_URL"
     value = "https://dqs-ui-dot-${var.project_id}.nw.r.appspot.com/"
   }
+  ##Below is Used by restAPI not CloudSQL Proxy
+  variable {
+    name      = "ENV_DB_CONNECTIONSTRING"
+    value     = "d=blaise;Server=LocalHost;Database=blaise;Pwd=${var.cloudsql_pw}"
+    is_secret = true
+  }
 }
