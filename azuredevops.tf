@@ -63,6 +63,14 @@ resource "azuredevops_variable_group" "azure_var_group" {
     value = var.blaise_install_distributables_bucket
   }
   variable {
+    name  = "ENV_BLAISE_DQS_BUCKET"
+    value = var.blaise_dqs_bucket
+  }
+  variable {
+    name  = "ENV_BLAISE_NIFI_BUCKET"
+    value = var.blaise_nifi_bucket
+  }
+  variable {
     name  = "ENV_RESTAPI_URL"
     value = "restapi.${var.region}-a.c.${var.project_id}.internal:90"
   }
