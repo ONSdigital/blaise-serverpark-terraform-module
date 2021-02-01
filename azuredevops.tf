@@ -26,6 +26,10 @@ resource "azuredevops_variable_group" "azure_var_group" {
     value = var.azuredevopsdns
   }
   variable {
+    name  = "ENV_BLAISE_SERVER_PARK_NAME"
+    value = var.server_park_name
+  }
+  variable {
     name  = "ENV_BLAISE_ADMIN_USER"
     value = var.blaise_admin_username
   }
