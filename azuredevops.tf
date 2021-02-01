@@ -92,4 +92,8 @@ resource "azuredevops_variable_group" "azure_var_group" {
     secret_value = "User Id=${var.cloudsql_user};Server=localhost;Database=blaise;Password=${var.cloudsql_pw}"
     is_secret    = true
   }
+  variable {
+    name  = "ENV_VM_SERVICEACCOUNT"
+    value = data.google_service_account.default.email
+  } 
 }
