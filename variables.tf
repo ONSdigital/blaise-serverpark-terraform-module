@@ -32,6 +32,7 @@ variable blaise_nifi_bucket { type = string }
 
 #CloudSQL Information
 variable cloudsql_connect { type = string }
+variable cloudsql_ip { type = string }
 variable cloudsql_user { type = string }
 variable cloudsql_pw { type = string }
 

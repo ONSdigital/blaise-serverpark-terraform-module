@@ -93,7 +93,7 @@ resource "azuredevops_variable_group" "azure_var_group" {
   ##Below is Used by restAPI not CloudSQL Proxy
   variable {
     name         = "ENV_DB_CONNECTIONSTRING"
-    secret_value = "User Id=${var.cloudsql_user};Server=localhost;Database=blaise;Password=${var.cloudsql_pw}"
+    secret_value = "User Id=${var.cloudsql_user};Server=${var.cloudsql_ip};Database=blaise;Password=${var.cloudsql_pw}"
     is_secret    = true
   }
   variable {
