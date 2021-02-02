@@ -87,17 +87,13 @@ resource "azuredevops_variable_group" "azure_var_group" {
     value = var.cloudsql_connect
   }
   variable {
-    name  = "ENV_CLOUDSQL_IP"
-    value = var.cloudsql_ip
-  }
-  variable {
     name  = "ENV_DQS_URL"
     value = "https://dqs-ui-dot-${var.project_id}.nw.r.appspot.com/"
   }
   ##Below is Used by restAPI not CloudSQL Proxy
   variable {
     name         = "ENV_DB_CONNECTIONSTRING"
-    secret_value = "User Id=${var.cloudsql_user};Server=localhost;Database=blaise;Password=${var.cloudsql_pw}"
+    secret_value = "User Id=${var.cloudsql_user};Server=${var.cloudsql_ip};Database=blaise;Password=${var.cloudsql_pw}"
     is_secret    = true
   }
   variable {
