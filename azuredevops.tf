@@ -87,6 +87,10 @@ resource "azuredevops_variable_group" "azure_var_group" {
     value = var.cloudsql_connect
   }
   variable {
+    name  = "ENV_CLOUDSQL_IP"
+    value = var.cloudsql_ip
+  }
+  variable {
     name  = "ENV_DQS_URL"
     value = "https://dqs-ui-dot-${var.project_id}.nw.r.appspot.com/"
   }
