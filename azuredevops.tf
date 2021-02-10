@@ -75,6 +75,10 @@ resource "azuredevops_variable_group" "azure_var_group" {
     value = var.blaise_nifi_bucket
   }
   variable {
+    name  = "ENV_BLAISE_NISRA_BUCKET"
+    value = var.blaise_nisra_bucket
+  }
+  variable {
     name  = "ENV_RESTAPI_URL"
     value = "restapi.${var.region}-a.c.${var.project_id}.internal:90"
   }
