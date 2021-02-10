@@ -20,7 +20,7 @@ resource "azuredevops_variable_group" "azure_var_group" {
   variable {
     name  = "ENV_BLAISE_SERVER_HOST_NAME"
     #value = google_compute_instance_from_template.instance["node"].name
-    value = join(",", google_compute_instance_group.serverpark.instances)
+    value = replace(join(",", google_compute_instance_group.serverpark.instances), "https://www.googleapis.com/compute/v1/projects/${var.project_id}/zones/europe-west2-a/instances/", "")
   }
   variable {
     name  = "ENV_BLAISE_EXTERNAL_SERVER_HOST_NAME"
