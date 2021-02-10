@@ -19,7 +19,8 @@ resource "azuredevops_variable_group" "azure_var_group" {
 
   variable {
     name  = "ENV_BLAISE_SERVER_HOST_NAME"
-    value = google_compute_instance_from_template.instance["node"].name
+    #value = google_compute_instance_from_template.instance["node"].name
+    value = merge(google_compute_instance_group.serverpark.instances)
   }
   variable {
     name  = "ENV_BLAISE_EXTERNAL_SERVER_HOST_NAME"
