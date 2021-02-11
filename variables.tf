@@ -29,6 +29,7 @@ variable blaise_admin_username { type = string }
 variable blaise_install_distributables_bucket { type = string }
 variable blaise_dqs_bucket { type = string }
 variable blaise_nifi_bucket { type = string }
+variable blaise_nisra_bucket { type = string }
 
 #CloudSQL Information
 variable cloudsql_connect { type = string }
