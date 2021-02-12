@@ -7,11 +7,12 @@ resource "google_compute_disk" "mgmt_node_d" {
   name = "blaise-${var.server_park_name}-mgmt-node-d-dribe"
   size = 10
   type = "pd-standard"
+  zone = join("-", [var.region, var.zones])
 }
 
 resource "google_compute_instance" "mgmt_node" {
   name         = "blaise-${var.server_park_name}-mgmt-node"
-  project   = var.project_id
+  project      = var.project_id
   zone         = join("-", [var.region, var.zones])
   machine_type = var.vm_machine_type
   tags         = var.vm_tags
