@@ -39,7 +39,7 @@ resource "google_compute_instance" "mgmt_node" {
 
   attached_disk {
     source      = google_compute_disk.mgmt_node_d.self_link
-    device_name = "D:\\"
+    device_name = "D"
   }
 
   metadata = merge(local.blaise_install_vars,
