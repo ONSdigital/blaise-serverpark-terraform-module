@@ -143,6 +143,10 @@ variable management_communication_port {
   default     = 8033
 }
 
+variable "mgmt_node_hostname" {
+  type = string
+}
+
 
 locals {
   blaise_install_vars = {

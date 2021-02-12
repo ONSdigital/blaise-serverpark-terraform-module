@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     azuredevops = {
-      source = "microsoft/azuredevops"
+      source  = "microsoft/azuredevops"
       version = "0.1.1"
     }
   }
@@ -42,7 +42,7 @@ resource "azuredevops_variable_group" "azure_var_group" {
     name  = "ENV_BLAISE_INTERNAL_SERVER_BINDING"
     value = "HTTP"
   }
-   variable {
+  variable {
     name  = "ENV_BLAISE_EXTERNAL_SERVER_BINDING"
     value = "HTTPS"
   }
@@ -103,5 +103,5 @@ resource "azuredevops_variable_group" "azure_var_group" {
   variable {
     name  = "ENV_VM_SERVICEACCOUNT"
     value = data.google_service_account.default.email
-  } 
+  }
 }
