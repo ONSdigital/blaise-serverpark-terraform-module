@@ -19,11 +19,11 @@ resource "azuredevops_variable_group" "azure_var_group" {
 
   variable {
     name  = "ENV_BLAISE_SERVER_HOST_NAME"
-    value = google_compute_instance_from_template.instance["node"].name
+    value = google_compute_instance.mgmt_node.hostname
   }
   variable {
     name  = "ENV_BLAISE_EXTERNAL_SERVER_HOST_NAME"
-    value = var.azuredevopsdns
+    value = google_compute_instance.mgmt_node.hostname
   }
   variable {
     name  = "ENV_BLAISE_SERVER_PARK_NAME"
@@ -73,10 +73,6 @@ resource "azuredevops_variable_group" "azure_var_group" {
   variable {
     name  = "ENV_BLAISE_NIFI_BUCKET"
     value = var.blaise_nifi_bucket
-  }
-  variable {
-    name  = "ENV_BLAISE_NISRA_BUCKET"
-    value = var.blaise_nisra_bucket
   }
   variable {
     name  = "ENV_RESTAPI_URL"

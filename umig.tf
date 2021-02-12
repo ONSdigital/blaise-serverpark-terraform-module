@@ -87,19 +87,19 @@ resource "random_password" "machinekey" {
 # }
 
 
-resource "google_compute_instance_group" "serverpark" {
-  name      = join("-", ["blaise", var.server_park_name, var.zones])
-  project   = var.project_id
-  zone      = join("-", [var.region, var.zones])
-  instances = [for x in google_compute_instance_from_template.instance : x.self_link]
+# resource "google_compute_instance_group" "serverpark" {
+#   name      = join("-", ["blaise", var.server_park_name, var.zones])
+#   project   = var.project_id
+#   zone      = join("-", [var.region, var.zones])
+#   instances = [for x in google_compute_instance_from_template.instance : x.self_link]
 
-  named_port {
-    name = "blaise-external-communication-port"
-    port = var.external_communication_port
-  }
+#   named_port {
+#     name = "blaise-external-communication-port"
+#     port = var.external_communication_port
+#   }
 
-  named_port {
-    name = "blaise-management-communication-port"
-    port = var.management_communication_port
-  }
-}
+#   named_port {
+#     name = "blaise-management-communication-port"
+#     port = var.management_communication_port
+#   }
+# }
