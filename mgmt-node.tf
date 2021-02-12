@@ -88,7 +88,7 @@ resource "google_compute_instance" "mgmt_node" {
   labels = merge(
     var.labels,
     {
-      name               = each.key
+      name               = "mgmt-node"
       type               = "server-park"
       "server_park_name" = var.server_park_name
     }
