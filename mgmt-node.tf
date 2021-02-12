@@ -19,7 +19,7 @@ resource "google_compute_instance" "mgmt_node" {
 
   boot_disk {
     initialize_params {
-      image = data.google_compute_image.blaise_image
+      image = data.google_compute_image.blaise_image.self_link
       size  = 100
       type  = "pd-ssd"
     }
