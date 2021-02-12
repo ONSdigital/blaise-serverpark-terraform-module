@@ -68,14 +68,14 @@ resource "google_compute_instance" "mgmt_node" {
       "BLAISE_SERVICES_LIST"           = var.blaise_services,
 
       # server park roles
-      "BLAISE_MANAGEMENTSERVER" = contains(each.value.roles, "management") ? "1" : "0",
-      "BLAISE_WEBSERVER"        = contains(each.value.roles, "webserver") ? "1" : "0",
-      "BLAISE_DATAENTRYSERVER"  = contains(each.value.roles, "dataentry") ? "1" : "0",
-      "BLAISE_DATASERVER"       = contains(each.value.roles, "data") ? "1" : "0",
-      "BLAISE_RESOURCESERVER"   = contains(each.value.roles, "resource") ? "1" : "0",
-      "BLAISE_SESSIONSERVER"    = contains(each.value.roles, "session") ? "1" : "0",
-      "BLAISE_AUDITTRAILSERVER" = contains(each.value.roles, "audittrail") ? "1" : "0",
-      "BLAISE_CATISERVER"       = contains(each.value.roles, "cati") ? "1" : "0"
+      "BLAISE_MANAGEMENTSERVER" = "1",
+      "BLAISE_WEBSERVER"        = "1",
+      "BLAISE_DATAENTRYSERVER"  = "1",
+      "BLAISE_DATASERVER"       = "1",
+      "BLAISE_RESOURCESERVER"   = "1",
+      "BLAISE_SESSIONSERVER"    = "1",
+      "BLAISE_AUDITTRAILSERVER" = "1",
+      "BLAISE_CATISERVER"       = "1",
 
       # scripts
       "SCRIPT_LOGS_CONFIG_TEMPLATE" = file("${path.module}/vm-scripts/log-config/winvm-blaise-service-log-template.conf"),
