@@ -94,7 +94,3 @@ resource "google_compute_instance" "mgmt_node" {
     }
   )
 }
-
-output "mgmt_node" {
-  value = google_compute_instance.mgmt_node.self_link
-}

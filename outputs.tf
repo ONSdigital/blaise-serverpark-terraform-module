@@ -3,20 +3,20 @@ output service_account {
   value       = data.google_service_account.default.account_id
 }
 
-output instances {
-  description = "map of instance data used by the reverse proxy"
-  value = [for idx, instance in google_compute_instance_from_template.instance :
-    { name : instance.name,
-      hostname : instance.name,
-      fq_internal_name : "${instance.name}.${instance.zone}.c.${var.project_id}.internal"
-    }
-  ]
-}
+# output instances {
+#   description = "map of instance data used by the reverse proxy"
+#   value = [for idx, instance in google_compute_instance_from_template.instance :
+#     { name : instance.name,
+#       hostname : instance.name,
+#       fq_internal_name : "${instance.name}.${instance.zone}.c.${var.project_id}.internal"
+#     }
+#   ]
+# }
 
-output hostnames {
-  description = "list of instance hostnames"
-  value       = [for x in google_compute_instance_from_template.instance : x.name]
-}
+# output hostnames {
+#   description = "list of instance hostnames"
+#   value       = [for x in google_compute_instance_from_template.instance : x.name]
+# }
 
 output admin_username {
   description = "blaise admin username"
@@ -40,11 +40,15 @@ output windows_password {
   value       = random_password.windows_password.result
 }
 
-output definition {
-  description = "server park definition for passing to dependencies"
-  value = {
-    management_endpoint : "get-management-fqdn",
-    name : var.server_park_name,
-    cati_endpoint : "get-cati-instance-fqdn"
-  }
+# output definition {
+#   description = "server park definition for passing to dependencies"
+#   value = {
+#     management_endpoint : "get-management-fqdn",
+#     name : var.server_park_name,
+#     cati_endpoint : "get-cati-instance-fqdn"
+#   }
+# }
+
+output "mgmt_node" {
+  value = google_compute_instance.mgmt_node.self_link
 }
